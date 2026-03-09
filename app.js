@@ -1,5 +1,6 @@
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+const SUPABASE_URL = window.env.SUPABASE_URL;
+const SUPABASE_KEY = window.env.SUPABASE_KEY;
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -38,30 +39,35 @@ async function addExpense() {
     }
 
 
-    console.log({ date, category, amount, notes });
+    await client
+        .from("expenses")
+        .insert({
+            date: date,
+            category: category,
+            amount: amount,
+            paymentMethod: paymentMethod,
+            notes: notes
+        });
 
-    // await client
-    //     .from("expenses")
-    //     .insert({
-    //         date: date,
-    //         category: category,
-    //         amount: amount,
-    //         notes: notes
-    //     });
-
-    // clearForm();
-    // loadExpenses();
+    clearForm();
+    loadExpenses();
 }
 
 function clearForm() {
     document.getElementById("amount").value = "";
     document.getElementById("notes").value = "";
     document.getElementById("category").value = "";
+    document.getElementById("payment-method").value = "";
+    setTodayDate();
 }
 
 async function loadExpenses() {
 
     let query = client.from("expenses").select("*");
+    // let query = client
+    //     .from("expenses")
+    //     .select("*")
+    //     .not("notes", "ilike", "%testexp%");
 
     const start = document.getElementById("startDate").value;
     const end = document.getElementById("endDate").value;
@@ -89,16 +95,16 @@ function renderExpenses(data) {
         total += Number(e.amount);
 
         container.innerHTML += `
-<div class="card">
-<div class="card-top">
-<span>${e.category}</span>
-<span>₹${e.amount}</span>
-</div>
-<div class="card-bottom">
-${e.date} • ${e.notes || ""}
-</div>
-</div>
-`;
+            <div class="card">
+            <div class="card-top">
+            <span>${e.category}</span>
+            <span>₹${e.amount}</span>
+            </div>
+            <div class="card-bottom">
+            ${e.date} • ${e.notes || ""}
+            </div>
+            </div>
+        `;
 
     });
 
