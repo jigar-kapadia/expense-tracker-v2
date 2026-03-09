@@ -99,7 +99,7 @@ function renderExpenses(data) {
             <div class="card-top">
             <span>${e.category}</span>
             <span>₹${e.amount}</span>
-            <span>₹${e.paymentMethod}</span>
+            <span>${e.paymentMethod}</span>
             </div>
             <div class="card-bottom">
             ${e.date} • ${e.notes || ""}
