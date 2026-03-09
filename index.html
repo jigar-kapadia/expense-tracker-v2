@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="app.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Expense Tracker</h1>
+    </header>
+
+    <section class="add-expense">
+
+        <input type="date" id="date">
+
+        <select id="category">
+            <option value="">Category</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Health</option>
+            <option>Groceries</option>
+            <option>Shopping</option>
+            <option>Bills</option>
+            <option>Drink</option>
+            <option>Smoking</option>
+            <option>Family</option>
+            <option>Misc</option>
+        </select>
+
+        <input type="number" id="amount" placeholder="Amount">
+
+        <input type="text" id="notes" placeholder="Notes">
+
+        <button onclick="addExpense()">Track</button>
+
+        <p id="error" class="error-message"></p>
+
+    </section>
+
+    <section class="filters">
+
+        <input type="date" id="startDate">
+        <input type="date" id="endDate">
+
+        <select id="filterCategory">
+            <option value="">All Categories</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Health</option>
+            <option>Groceries</option>
+            <option>Shopping</option>
+            <option>Bills</option>
+            <option>Drink</option>
+            <option>Smoking</option>
+            <option>Family</option>
+            <option>Misc</option>
+        </select>
+
+        <button onclick="loadExpenses()">Apply Filters</button>
+
+    </section>
+
+    <section class="summary">
+        Total: ₹<span id="totalAmount">0</span>
+    </section>
+
+    <section id="expenseList"></section>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
