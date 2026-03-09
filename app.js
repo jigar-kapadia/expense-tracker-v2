@@ -16,6 +16,7 @@ async function addExpense() {
     const date = document.getElementById("date").value;
     const category = document.getElementById("category").value;
     const amount = document.getElementById("amount").value;
+    const paymentMethod = document.getElementById("payment-method").value;
     const notes = document.getElementById("notes").value;
 
     const error = document.getElementById("error");
@@ -28,6 +29,11 @@ async function addExpense() {
 
     if (!amount || amount <= 0) {
         error.innerText = "Enter valid amount";
+        return;
+    }
+
+    if (!paymentMethod) {
+        error.innerText = "Select payment method";
         return;
     }
 
