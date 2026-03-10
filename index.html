@@ -17,7 +17,52 @@
         <h1>Expense Tracker</h1>
     </header>
 
-    <section class="add-expense">
+
+    <section class="add-expense-container">
+
+        <div class="add-expense-header" onclick="toggleExpenseForm()">
+            <span>Add Expense</span>
+            <span id="toggleIcon">▼</span>
+        </div>
+
+        <div id="expenseForm" class="add-expense">
+
+            <input type="date" id="date">
+
+            <select id="category">
+                <option value="">Category</option>
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Health</option>
+                <option>Groceries</option>
+                <option>Shopping</option>
+                <option>Bills</option>
+                <option>Drink</option>
+                <option>Smoking</option>
+                <option>Family</option>
+                <option>Misc</option>
+            </select>
+
+            <input type="number" id="amount" placeholder="Amount">
+
+            <select id="payment-method">
+                <option value="">Payment Method</option>
+                <option>Credit Card</option>
+                <option>Debit Card</option>
+                <option>UPI</option>
+                <option>Cash</option>
+            </select>
+
+            <input type="text" id="notes" placeholder="Notes">
+
+            <button onclick="addExpense()">Track</button>
+
+            <p id="error"></p>
+
+        </div>
+
+    </section>
+    <!-- <section class="add-expense">
 
         <input type="date" id="date">
 
@@ -51,7 +96,7 @@
 
         <p id="error" class="error-message"></p>
 
-    </section>
+    </section> -->
 
     <section class="filters">
 

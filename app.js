@@ -1,9 +1,11 @@
 
 const SUPABASE_URL = window.env.SUPABASE_URL;
 const SUPABASE_KEY = window.env.SUPABASE_KEY;
+const ENABLE_DELETE = true;
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+toggleExpenseForm();
 setTodayDate();
 loadExpenses();
 
@@ -51,6 +53,7 @@ async function addExpense() {
 
     clearForm();
     loadExpenses();
+    toggleExpenseForm();
 }
 
 function clearForm() {
@@ -59,6 +62,21 @@ function clearForm() {
     document.getElementById("category").value = "";
     document.getElementById("payment-method").value = "";
     setTodayDate();
+}
+
+async function deleteExpense(id) {
+
+    const confirmDelete = confirm("Delete this expense?");
+
+    if (!confirmDelete) return;
+
+    await client
+        .from("expenses")
+        .delete()
+        .eq("id", id);
+
+    loadExpenses();
+
 }
 
 async function loadExpenses() {
@@ -104,11 +122,28 @@ function renderExpenses(data) {
             <div class="card-bottom">
             ${e.date} • ${e.notes || ""}
             </div>
+            <div class="card-actions">
+            ${ENABLE_DELETE ? `<button class="delete-btn" onclick="deleteExpense(${e.id})">Delete</button>` : ""}
             </div>
         `;
 
     });
 
     document.getElementById("totalAmount").innerText = total;
+
+}
+
+function toggleExpenseForm() {
+
+    const form = document.getElementById("expenseForm");
+    const icon = document.getElementById("toggleIcon");
+
+    form.classList.toggle("active");
+
+    if (form.classList.contains("active")) {
+        icon.innerText = "▲";
+    } else {
+        icon.innerText = "▼";
+    }
 
 }

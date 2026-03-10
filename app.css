@@ -55,6 +55,21 @@ button {
     font-weight: bold;
 }
 
+.delete-btn {
+    margin-top: 8px;
+    background: #c0392b;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.card-actions {
+    padding-left: 290px;
+    display: flex;
+    gap: 10px;
+}
+
 #expenseList {
     display: flex;
     flex-direction: column;
@@ -76,13 +91,39 @@ button {
 }
 
 .card-bottom {
-    font-size: 14px;
+    font-size: 16px;
     color: #555;
-    margin-top: 4px;
+    margin-top: 15px;
 }
 
-.error-message {
+#error {
     color: red;
+}
+
+.add-expense-container {
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.add-expense-header {
+    padding: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-expense {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+}
+
+.add-expense.active {
+    display: flex;
 }
 
 @media(min-width:768px) {
