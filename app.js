@@ -61,6 +61,21 @@ function clearForm() {
     setTodayDate();
 }
 
+async function deleteExpense(id) {
+
+    const confirmDelete = confirm("Delete this expense?");
+
+    if (!confirmDelete) return;
+
+    await client
+        .from("expenses")
+        .delete()
+        .eq("id", id);
+
+    loadExpenses();
+
+}
+
 async function loadExpenses() {
 
     let query = client.from("expenses").select("*");
