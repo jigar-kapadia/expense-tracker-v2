@@ -90,11 +90,11 @@ async function loadExpenses() {
     const start = document.getElementById("startDate").value;
     const end = document.getElementById("endDate").value;
     const category = document.getElementById("filterCategory").value;
-
+    const paymentMethod = document.getElementById("filterPaymentMethod").value;
     if (start) query = query.gte("date", start);
     if (end) query = query.lte("date", end);
     if (category) query = query.eq("category", category);
-
+    if (paymentMethod) query = query.eq("paymentMethod", paymentMethod);
     const { data } = await query.order("date", { ascending: false });
 
     renderExpenses(data);
